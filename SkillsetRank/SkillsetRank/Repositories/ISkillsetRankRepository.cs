@@ -9,5 +9,6 @@ namespace SkillsetRank.Repositories
         Task<int> AddEmployee(Employee employee);
         Task<int> DeleteEmployee(string uid);
         Task UpdateEmployee(Employee employee);
+        Task<IEnumerable<Skill>> GetSkills();
     }
 }

@@ -36,5 +36,9 @@ namespace SkillsetRank.Services
         {
             await _skillsetRankRepository.UpdateEmployee(employee);
         }
+        public async Task<IEnumerable<Skill>> GetSkills()
+        {
+            return await _skillsetRankRepository.GetSkills();
+        }
     }
 }

@@ -79,5 +79,10 @@ namespace SkillsetRank.Repositories
 
             }
         }
+
+        public async Task<IEnumerable<Skill>> GetSkills()
+        {
+            return await _skillsetContext.Skills.ToListAsync();
+        }
     }
 }

@@ -4,7 +4,7 @@ using SkillsetRank.Services;
 
 namespace SkillsetRank.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class SkillsetRankController : Controller
     {
@@ -129,6 +129,29 @@ namespace SkillsetRank.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("skills")]
+        public async Task<IActionResult> GetSkills()
+        {
+            try
+            {
+                var skills = await _skillsetRankService.GetSkills();
+
+                if (skills == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(skills);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

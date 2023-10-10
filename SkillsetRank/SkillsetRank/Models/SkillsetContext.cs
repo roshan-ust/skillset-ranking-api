@@ -17,6 +17,8 @@ public partial class SkillsetContext : DbContext
 
     public virtual DbSet<Employee> Employees { get; set; }
 
+    public virtual DbSet<Skill> Skills { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=B619LCOK;Initial Catalog=Skillset;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -50,6 +52,17 @@ public partial class SkillsetContext : DbContext
             entity.Property(e => e.Uid)
                 .HasMaxLength(10)
                 .HasColumnName("uid");
+        });
+
+        modelBuilder.Entity<Skill>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Skill__3214EC0797D528DC");
+
+            entity.ToTable("Skill");
+
+            entity.HasIndex(e => e.Name, "UQ__Skill__737584F6C4563A31").IsUnique();
+
+            entity.Property(e => e.Name).HasMaxLength(25);
         });
 
         OnModelCreatingPartial(modelBuilder);
